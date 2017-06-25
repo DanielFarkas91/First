@@ -87,25 +87,22 @@ def print_table(inventory, order=None):
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename="import_inventory.csv"):
     import csv
-    csv_file = open('import_inventory.csv')
-    csv_reader = csv.reader(csv_file, delimiter=",")
-
-    new_items = []
-    for new_item in csv_reader:
-        new_items_list = new_item
-        
-        
-        for item in new_items_list:
-            for key, value in inventory.items():
-                if item == key:
-                    inventory.update({item: value + 1})
-                    continue
-
+    with open("import_inventory.csv", "r") as importFile:
+        importFileReader = csv.reader(importFile)
+        itemsList = []
+        for item in importFileReader:
+            if len (item) != 0:
+                itemsList = item
+    for item in itemsList:
+        for key, value in inventory.items():
+            if item == key:
+                inventory.update({item: value + 1})
+                continue
+                
         if item not in inventory.keys():
             inventory.update({item: 1})
 
-        return inventory
-    csvfile.close()
+    return inventory
 
 
 # Exports the inventory into a .csv file.
@@ -115,7 +112,7 @@ def import_inventory(inventory, filename="import_inventory.csv"):
 def export_inventory(inventory, filename="export_inventory.csv"):
     import csv
     with open("export_inventory.csv", 'w') as csvfile:
-        csv_write = csv.writer(csvfile, delimiter=",")
+        csv_write = csv.write(csvfile, delimiter=",")
         for key, value in inventory.items():
             cs_write.writerow([key, value])
     csvfile.close()
