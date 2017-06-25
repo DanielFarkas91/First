@@ -115,7 +115,7 @@ def import_inventory(inventory, filename="import_inventory.csv"):
 def export_inventory(inventory, filename="export_inventory.csv"):
     import csv
     with open("export_inventory.csv", 'w') as csvfile:
-        writeCSV = csv.writer(csvfile, delimiter=",")
+        csv_write = csv.writer(csvfile, delimiter=",")
         for key, value in inventory.items():
-            writeCSV.writerow([key, value])
+            cs_write.writerow([key, value])
     csvfile.close()
