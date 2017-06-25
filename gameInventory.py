@@ -111,8 +111,15 @@ def import_inventory(inventory, filename="import_inventory.csv"):
 # with comma separated values (CSV).
 def export_inventory(inventory, filename="export_inventory.csv"):
     import csv
-    with open("export_inventory.csv", 'w') as csvfile:
-        csv_write = csv.write(csvfile, delimiter=",")
+    with open("export_inventory.csv", 'w') as exportFile:
+        exportFileReader = csv.writer(exportFile)
+        
+        lista = []
         for key, value in inventory.items():
-            cs_write.writerow([key, value])
-    csvfile.close()
+            i = 0
+            while i < value:
+                lista.append(key)
+                i = i + 1
+        print(lista)
+        for i in range(0,1):
+            exportFileReader.writerow(lista)
